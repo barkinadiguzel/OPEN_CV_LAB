@@ -21,12 +21,11 @@ image[50:150, 50:150] = [0, 255, 0]  # green square in region
 # split the image into B, G, R channels
 b, g, r = cv2.split(image)  # separate B, G, R channels
 
-# show each channel
-cv2.imshow('Blue Channel', b)
-cv2.imshow('Green Channel', g)
-cv2.imshow('Red Channel', r)
+# show each channel and modified image with clear titles
+cv2.imshow('1 - Blue Channel', b)
+cv2.imshow('2 - Green Channel', g)
+cv2.imshow('3 - Red Channel', r)
+cv2.imshow('4 - Modified Image', image)
 
-# show the modified image
-cv2.imshow('Modified Image', image)  # display modified image
 cv2.waitKey(0)
 cv2.destroyAllWindows()
