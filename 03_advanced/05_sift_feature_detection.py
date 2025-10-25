@@ -1,33 +1,31 @@
 """
-Harris Corner Detection
+SIFT Keypoint Detection
 
-This script detects corners in a grayscale image using the Harris method.
-- Converts image to float32 for computation
-- Computes Harris response for each pixel
-- Dilates result to mark corners more clearly
-- Marks detected corners in red on the original image
-- Useful to identify keypoints or interest points in the image
+This script detects and visualizes keypoints in a grayscale image using SIFT.
+- SIFT (Scale-Invariant Feature Transform) finds distinctive points in the image
+- Computes descriptors for each keypoint (used in matching or recognition)
+- Draws detected keypoints on the image
+- Useful for object recognition, image matching, and feature extraction
 """
 
 import cv2
 import numpy as np
 
 # Load grayscale image
-gray = cv2.imread('assets/images/lena.jpg', cv2.IMREAD_GRAYSCALE)
+image = cv2.imread('assets/images/lena.jpg', cv2.IMREAD_GRAYSCALE)
 
-# Convert to float32 for Harris
-gray_float = np.float32(gray)
+# Initialize SIFT detector
+sift = cv2.SIFT_create()
 
-# Harris corner detection
-dst = cv2.cornerHarris(gray_float, blockSize=2, ksize=3, k=0.04)
-dst = cv2.dilate(dst, None)
+# Detect keypoints and descriptors
+keypoints, descriptors = sift.detectAndCompute(image, None)
 
-# Convert grayscale to BGR for coloring
-image_color = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+# Draw keypoints on the image
+image_with_keypoints = cv2.drawKeypoints(
+    image, keypoints, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+)
 
-# Mark corners in red
-image_color[dst > 0.01 * dst.max()] = [0, 0, 255]
-
-cv2.imshow('Harris Corners', image_color)
+# Show results
+cv2.imshow('SIFT Keypoints', image_with_keypoints)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
