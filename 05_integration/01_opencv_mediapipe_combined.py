@@ -20,7 +20,7 @@ face_mesh = mp_face_mesh.FaceMesh(
 mp_drawing = mp.solutions.drawing_utils
 
 # --- Load emoji ---
-emoji = cv2.imread('assets/images/yawn.jpg', cv2.IMREAD_UNCHANGED)
+emoji = cv2.imread('assets/emojis/yawn.jpg', cv2.IMREAD_UNCHANGED)
 
 # --- Open webcam ---
 cap = cv2.VideoCapture(0)
